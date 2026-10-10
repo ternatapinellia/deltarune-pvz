@@ -616,8 +616,8 @@ function showBanner(){
 
 function gameOver(won){
   S.over=true; S.won=!!won;
-  elOvTitle.textContent=won?'🎉 守住了！':'💀 老鼠吃光了你家的东西';
-  elOvText.textContent=won?'所有 Spamton 都被清掉了。':'有 Spamton 溜进了屋里。再来一次？';
+  elOvTitle.textContent=won?'🎉 守住了！':'💀 老鼠偷光了你家的钱';
+  elOvText.textContent=won?'所有 Spamton 都被清掉了。':'有 Spamton 溜进了屋里，把钱搬空了。再来一次？';
   elOvBtn.textContent='重玩本关';
   /* 关键：结算按钮重新绑定，避免沿用选关界面的“开始第一关” */
   elOvBtn.onclick=function(){ startLevel(S?S.lvIndex:0); };
