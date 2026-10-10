@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>暗世界保卫战 · Deltarune x PvZ</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+
+  <header id="topbar">
+    <div id="sunbox">
+      <div id="sunicon">☀</div>
+      <span id="suncount">100</span>
+    </div>
+
+    <div id="seedbank"></div>
+
+    <button id="shovel" title="铲子 Lancer">✦</button>
+
+    <div id="progressWrap">
+      <span id="levelTag"></span>
+      <div id="progressBar"><div id="progressFill"></div></div>
+    </div>
+
+    <div id="ctrl">
+      <button id="btnPause" title="暂停 / 继续">⏸</button>
+      <button id="btnMenu" title="退出到关卡选择">✕</button>
+    </div>
+  </header>
+
+  <canvas id="game"></canvas>
+
+  <div id="banner"></div>
+
+  <div id="pauseTag">已暂停</div>
+
+  <div id="overlay">
+    <div id="overlay-inner">
+      <h1 id="ov-title"></h1>
+      <p id="ov-text"></p>
+      <button id="ov-btn"></button>
+      <div id="levelSelect"></div>
+    </div>
+  </div>
+
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/assets.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>
