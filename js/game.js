@@ -463,6 +463,27 @@ function update(dt){
   /* 僵尸 */
   S.zombies.forEach(function(z){
     if(z.hp<=0) return;
+
+    /* 推冰车：碾碎路上的植物，不停下 */
+    if(z.crush){
+      z.eating=false;
+      z.x-=z.speed*dt;
+      for(let i=S.plants.length-1;i>=0;i--){
+        const pl=S.plants[i];
+        if(pl.r!==z.r) continue;
+        const px=CFG.lawnX+pl.c*CFG.cellW;
+        if(Math.abs(z.x-px)<CFG.cellW*0.42){
+          /* 地刺扎不到车，其他都被压碎 */
+          if(!pl.cfg.spike){
+            S.effects.push({x:px, y:CFG.lawnY+pl.r*CFG.cellH+CFG.cellH/2,
+                            r:CFG.cellW*0.6, life:0.35, max:0.35});
+            S.plants.splice(i,1);
+          }
+        }
+      }
+      return;   // 跳过啃食逻辑
+    }
+
     const target=findEatTarget(z);
     if(target){
       z.eating=true; target.hp-=z.dmg*dt;
@@ -563,7 +584,7 @@ function transformImitator(pl){
   if(toZombie){
     /* 变成僵尸：就在这一格出现（趣味所在），但只出普通/路障，且慢一些 */
     S.plants.splice(i,1);
-    const pool = ['normal','normal','cone'];
+    const pool = ['normal','normal','cone', (Math.random()<0.15?'zamboni':'normal')];
     const type = pool[Math.floor(Math.random()*pool.length)];
     const cfg = ZOMBIES[type];
     S.zombies.push({ type:type, cfg:cfg,
@@ -612,7 +633,8 @@ function dropWave(list, huge){
     const spd = cfg.speed * (0.9 + Math.random()*0.25);
 
     S.zombies.push({ type:type, cfg:cfg, hp:cfg.hp, maxHp:cfg.hp,
-      r:r, x:x, y:0, eating:false, dmg:cfg.dmg, speed:spd, img:cfg.img });
+      r:r, x:x, y:0, eating:false, dmg:cfg.dmg, speed:spd, img:cfg.img,
+      crush:!!cfg.crush });
   });
 
   if(huge) showBanner();

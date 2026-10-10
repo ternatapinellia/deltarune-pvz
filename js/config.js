@@ -25,7 +25,7 @@ const COLORS = {
   dispenser:'#8fd4e8', swaptenna:'#8a6ad1', ralsai:'#5fb6c9',
   swapspamton:'#d1546e', lancer:'#4a7fd1', imitator:'#b8a0e0',
   spamton:'#d8d3e0', spamton_cone:'#b7adc4',
-  spamton_bucket:'#9ea7b5', spamton_dancer:'#e0b0c8',
+  spamton_bucket:'#9ea7b5', spamton_dancer:'#e0b0c8', spamton_zamboni:'#9ec9e8',
 };
 
 /* ---------------- 植物 ---------------- */
@@ -47,7 +47,9 @@ const ZOMBIES = {
   normal: { name:'Spamton',      hp:200,  speed:17, dmg:100, img:'spamton' },
   cone:   { name:'路障 Spamton', hp:560,  speed:17, dmg:100, img:'spamton_cone' },
   bucket: { name:'铁桶 Spamton', hp:1300, speed:17, dmg:100, img:'spamton_bucket' },
-  dancer: { name:'舞王 Spamton', hp:500,  speed:17, dmg:100, img:'spamton_dancer' },
+  dancer: { name:'舞王 Spamton',  hp:500,  speed:17, dmg:100, img:'spamton_dancer' },
+  zamboni:{ name:'推冰车 Spamton', hp:2200, speed:24, dmg:100, img:'spamton_zamboni',
+            crush:true },   // 直接碾碎植物，不啃食
 };
 
 /* ---------------- 关卡 ---------------- */
@@ -63,8 +65,8 @@ const LEVELS = [
       { t:82,  z:['normal','cone'] },
       { t:110, z:['normal','normal','cone'] },
       { t:140, z:['cone','bucket','normal'] },
-      { t:172, z:['normal','cone','cone','bucket'] },
-      { t:205, z:['bucket','bucket','cone','normal','normal'], huge:true },
+      { t:172, z:['normal','cone','cone','bucket','zamboni'] },
+      { t:205, z:['bucket','bucket','cone','normal','normal','zamboni','zamboni'], huge:true },
     ],
   },
 
@@ -85,7 +87,7 @@ const LEVELS = [
       { t:63, z:['bucket','bucket','cone','cone','normal','normal'], rand:{n:5, pool:['normal','cone','bucket']} },
       { t:74, z:['bucket','bucket','bucket','cone','normal','normal','normal'], rand:{n:6, pool:['normal','cone','bucket']} },
       { t:86, z:['bucket','bucket','cone','cone','cone','normal','normal','normal'], rand:{n:7, pool:['normal','cone','bucket']} },
-      { t:99, z:['bucket','bucket','bucket','bucket','cone','cone','cone','normal','normal','normal'], rand:{n:8, pool:['normal','cone','bucket']}, huge:true },
+      { t:99, z:['bucket','bucket','bucket','bucket','cone','cone','cone','normal','normal','normal','zamboni','zamboni'], rand:{n:8, pool:['normal','cone','bucket']}, huge:true },
     ],
   },
 
@@ -101,9 +103,9 @@ const LEVELS = [
       { t:28, z:['cone','normal','normal'] },
       { t:39, z:['cone','normal','normal','normal','normal'] },
       { t:51, z:['bucket','cone','cone','normal','normal'] },
-      { t:64, z:['bucket','bucket','cone','cone','normal','normal','normal'] },
+      { t:64, z:['bucket','bucket','cone','cone','normal','normal','normal','zamboni'] },
       { t:78, z:['bucket','bucket','bucket','cone','cone','cone','normal','normal','normal'] },
-      { t:94, z:['bucket','bucket','bucket','bucket','cone','cone','cone','normal','normal','normal','normal'], huge:true },
+      { t:94, z:['bucket','bucket','bucket','bucket','cone','cone','cone','normal','normal','normal','normal','zamboni','zamboni'], huge:true },
     ],
   },
   {
@@ -120,7 +122,7 @@ const LEVELS = [
       { t:95,  z:['normal','normal','cone'] },
       { t:120, z:['cone','bucket','normal'] },
       { t:148, z:['normal','cone','cone','bucket'] },
-      { t:178, z:['bucket','bucket','cone','normal','normal'], huge:true },
+      { t:178, z:['bucket','bucket','cone','normal','normal','zamboni'], huge:true },
     ],
   },
 ];
