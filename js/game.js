@@ -544,9 +544,19 @@ function transformImitator(pl){
   const cc = cellCenter(pl.r, pl.c);
   S.effects.push({ x:cc.x, y:cc.y, r:CFG.cellW*0.9, life:0.45, max:0.45 });
 
-  const canBe = S.lv.plants.filter(function(k){
-    return !PLANTS[k].imitate && !PLANTS[k].bomb;
+  /* 能变出来的植物：
+     1) 关卡里配置了 imitatePool 就用它
+     2) 否则用本关可用植物
+     3) 如果都没有（像第四关只给模仿者），就用全部植物
+     都要排除模仿者自己和樱桃炸弹 */
+  let canBe = (S.lv.imitatePool || S.lv.plants).filter(function(k){
+    return PLANTS[k] && !PLANTS[k].imitate && !PLANTS[k].bomb;
   });
+  if(!canBe.length){
+    canBe = Object.keys(PLANTS).filter(function(k){
+      return !PLANTS[k].imitate && !PLANTS[k].bomb;
+    });
+  }
 
   const toZombie = Math.random() < 0.5;
 
